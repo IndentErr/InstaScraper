@@ -1,3 +1,5 @@
+'''!!!! MAKE IT SO INSTAGRAM DOESN'T BAN BOT. ADD DELAYS AND MORE HUMAN TIMINGS'!!!!'''
+# no failsafe for incorrect input/typos
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -6,14 +8,14 @@ import os
 
 def login():
     login_id = 'Your id'
-    login_pw = 'your password'
+    login_pw = 'Your passowrd'
     id_login = driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[1]/div/label/input')
     id_login.send_keys(login_id)
     pw_login = driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[2]/div/label/input')
     pw_login.send_keys(login_pw)
     click_login = driver.find_element_by_xpath('//*[@id="loginForm"]/div/div[3]')
     click_login.click()
-    time.sleep(3)
+    time.sleep(2)
     click_save = driver.find_element_by_class_name("sqdOP.yWX7d.y3zKF")
     click_save.click()
     time.sleep(1)
@@ -26,7 +28,8 @@ dest_influ = "https://hypeauditor.com/top-instagram-all-united-states/"
 driver = webdriver.Firefox(service_log_path=os.devnull)
 driver.get(dest_influ)
 
-
+'''!!!! MAKE IT SO INSTAGRAM DOESN'T BAN BOT. ADD DELAYS AND MORE HUMAN TIMINGS'!!!!'''
+# allows multiple inputs and sorts id_list running function per each
 id_list = []
 i = 1
 while i <= 20:
@@ -59,12 +62,15 @@ for insta_id in id_list:
         imgUrl = i.select_one(File_name_external).img['src']
         with urlopen(imgUrl) as f : 
             #Creates directory per person if folder doesn't exist
-            if not os.path.exists(f'./{insta_id}'):
-                os.makedirs(f'./{insta_id}')
-            with open(f'./{insta_id}/' + date_time + insta_id + str(n) + '.jpg', 'wb') as h:
+            if not os.path.exists(f'./img/{insta_id}'):
+                os.makedirs(f'./img/{insta_id}')
+            with open(f'./img/{insta_id}/' + date_time + insta_id + str(n) + '.jpg', 'wb') as h:
                 img = f.read()
                 h.write(img)
 
             n+=1
+    # Random delay to simulate human browsing, may need subprocess such as navigating back to homepage and then new page.
+    #time.sleep(random.randint(3,10))
     time.sleep(2)
 driver.quit()
+'''!!!! MAKE IT SO INSTAGRAM DOESN'T BAN BOT. ADD DELAYS AND MORE HUMAN TIMINGS'!!!!'''
